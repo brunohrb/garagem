@@ -1,0 +1,317 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Tema Artístico Contemporâneo - Laranja, Azul, Ouro */
+  --primary: #FF6B35;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #004E89;
+  --sidebar-primary-foreground: #FFFFFF;
+  --chart-1: #FF6B35;
+  --chart-2: #004E89;
+  --chart-3: #F7B801;
+  --chart-4: #E63946;
+  --chart-5: #A23B72;
+  --radius: 0.75rem;
+  --background: #FFFFFF;
+  --foreground: #1a1a1a;
+  --card: #F9F7F4;
+  --card-foreground: #1a1a1a;
+  --popover: #FFFFFF;
+  --popover-foreground: #1a1a1a;
+  --secondary: #F7B801;
+  --secondary-foreground: #1a1a1a;
+  --muted: #E8D5C4;
+  --muted-foreground: #666666;
+  --accent: #E63946;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E63946;
+  --destructive-foreground: #FFFFFF;
+  --border: #E8D5C4;
+  --input: #F9F7F4;
+  --ring: #FF6B35;
+  --sidebar: #004E89;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-accent: #FF6B35;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #003d6b;
+  --sidebar-ring: #FF6B35;
+}
+
+.dark {
+  --primary: #FF6B35;
+  --primary-foreground: #FFFFFF;
+  --sidebar-primary: #FF6B35;
+  --sidebar-primary-foreground: #1a1a1a;
+  --background: #0f0f0f;
+  --foreground: #E8D5C4;
+  --card: #1a1a1a;
+  --card-foreground: #E8D5C4;
+  --popover: #1a1a1a;
+  --popover-foreground: #E8D5C4;
+  --secondary: #F7B801;
+  --secondary-foreground: #1a1a1a;
+  --muted: #333333;
+  --muted-foreground: #999999;
+  --accent: #E63946;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E63946;
+  --destructive-foreground: #FFFFFF;
+  --border: #333333;
+  --input: #1a1a1a;
+  --ring: #FF6B35;
+  --chart-1: #FF6B35;
+  --chart-2: #004E89;
+  --chart-3: #F7B801;
+  --chart-4: #E63946;
+  --chart-5: #A23B72;
+  --sidebar: #004E89;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-accent: #FF6B35;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #003d6b;
+  --sidebar-ring: #FF6B35;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  /* Elemento decorativo de pincelada */
+  .brush-stroke {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .brush-stroke::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF6B35 0%, #F7B801 50%, transparent 100%);
+    animation: brushStroke 0.8s ease-out forwards;
+  }
+
+  @keyframes brushStroke {
+    from {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    to {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  /* Cartão com borda colorida */
+  .card-colored {
+    @apply rounded-lg border-4 p-6 transition-all duration-300;
+  }
+
+  .card-colored.orange {
+    @apply border-orange-500 bg-orange-50 dark:bg-orange-950/20;
+  }
+
+  .card-colored.blue {
+    @apply border-blue-700 bg-blue-50 dark:bg-blue-950/20;
+  }
+
+  .card-colored.gold {
+    @apply border-yellow-500 bg-yellow-50 dark:bg-yellow-950/20;
+  }
+
+  .card-colored.rose {
+    @apply border-rose-500 bg-rose-50 dark:bg-rose-950/20;
+  }
+
+  /* Hover effect para cartões */
+  .card-colored:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+
+  /* Divisor com pincelada */
+  .divider-brush {
+    @apply relative my-8 h-1 bg-gradient-to-r from-orange-500 via-yellow-500 to-transparent rounded-full;
+  }
+
+  /* Badge artístico */
+  .badge-artistic {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm;
+  }
+
+  .badge-artistic.primary {
+    @apply bg-orange-500 text-white;
+  }
+
+  .badge-artistic.secondary {
+    @apply bg-blue-700 text-white;
+  }
+
+  .badge-artistic.accent {
+    @apply bg-yellow-500 text-gray-900;
+  }
+
+  /* Botão com estilo artístico */
+  .btn-artistic {
+    @apply relative inline-flex items-center justify-center px-6 py-3 font-semibold rounded-lg transition-all duration-300 overflow-hidden;
+  }
+
+  .btn-artistic.primary {
+    @apply bg-orange-500 text-white hover:bg-orange-600 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-artistic.secondary {
+    @apply bg-blue-700 text-white hover:bg-blue-800 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-artistic.outline {
+    @apply border-2 border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-950/20;
+  }
+
+  /* Animação de entrada */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in-up {
+    animation: slideInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in-scale {
+    animation: fadeInScale 0.4s ease-out forwards;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+}
+
+/* Tipografia - Design Artístico */
+
+
+@layer utilities {
+  .font-sans {
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+
+  .text-body-lg {
+    @apply text-lg font-sans font-medium;
+  }
+
+  .text-body-md {
+    @apply text-base font-sans font-normal;
+  }
+
+  .text-body-sm {
+    @apply text-sm font-sans font-normal;
+  }
+}
