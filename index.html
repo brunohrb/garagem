@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -33,6 +32,7 @@
             width: 100%;
         }
 
+        /* DESKTOP SIDEBAR */
         .sidebar {
             width: 280px;
             background: linear-gradient(135deg, #004E89 0%, #003d6b 100%);
@@ -139,6 +139,49 @@
             display: block;
         }
 
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #FF6B35;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #004E89;
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
         .section {
             background: white;
             padding: 20px;
@@ -216,6 +259,63 @@
             background-color: #003d6b;
         }
 
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .table thead {
+            background-color: #f9f9f9;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #004E89;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-orcamento {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge-producao {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-pintando {
+            background-color: #f3e5f5;
+            color: #6a1b9a;
+        }
+
+        .badge-entregue {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        /* ORÇAMENTO INTERATIVO */
         .budget-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -271,12 +371,60 @@
             min-height: 400px;
         }
 
-        #canvas-3d {
+        .car-image {
             width: 100%;
             max-width: 450px;
-            height: 350px;
-            border-radius: 8px;
+            height: auto;
+            margin: 20px 0;
+            object-fit: contain;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .car-image-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .car-image-canvas {
+            display: block;
+            cursor: crosshair;
             border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+        }
+
+        .part-label {
+            position: absolute;
+            background: rgba(255, 107, 53, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 10;
+            display: none;
+        }
+
+        .part-label.show {
+            display: block;
+        }
+
+        .car-part-clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .car-part-clickable:hover {
+            opacity: 0.7;
+            transform: scale(1.02);
         }
 
         .budget-summary {
@@ -421,47 +569,6 @@
             box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
         }
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 16px;
-            font-size: 14px;
-        }
-
-        .table thead {
-            background-color: #f9f9f9;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .table th {
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            color: #004E89;
-        }
-
-        .table td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .table tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .badge-orcamento {
-            background-color: #e3f2fd;
-            color: #1565c0;
-        }
-
         .mobile-menu {
             display: none;
             position: fixed;
@@ -512,6 +619,15 @@
             .sidebar {
                 width: 240px;
             }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 16px;
+            }
+
             .budget-container {
                 grid-template-columns: 1fr;
             }
@@ -521,17 +637,144 @@
             .app {
                 flex-direction: column;
             }
+
             .sidebar {
                 display: none;
             }
+
             .mobile-menu {
                 display: block;
             }
+
             .main {
                 padding-bottom: 70px;
             }
+
+            .header {
+                padding: 14px 16px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 14px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 14px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-value {
+                font-size: 28px;
+            }
+
+            .section {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .section h2 {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th,
+            .table td {
+                padding: 8px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                font-size: 16px;
+            }
+
+            .badge {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+
             .budget-container {
                 grid-template-columns: 1fr;
+            }
+
+            .car-models {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .price-config-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            .stats-grid {
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .section {
+                padding: 14px;
+                margin-bottom: 10px;
+            }
+
+            .section h2 {
+                font-size: 18px;
+            }
+
+            .table {
+                font-size: 11px;
+            }
+
+            .table th,
+            .table td {
+                padding: 6px;
+            }
+
+            .btn {
+                padding: 9px 16px;
+                font-size: 12px;
+                width: 100%;
+            }
+
+            .budget-total-value {
+                font-size: 28px;
             }
         }
     </style>
@@ -545,41 +788,191 @@
                 <div class="sidebar-title">Oficina<br>Pintura</div>
             </div>
             <ul class="sidebar-menu">
-                <li><a class="menu-link active" data-page="orcamentos">💰 Orçamentos</a></li>
+                <li><a class="menu-link active" data-page="dashboard">📊 Dashboard</a></li>
+                <li><a class="menu-link" data-page="carros">🚗 Carros</a></li>
+                <li><a class="menu-link" data-page="orcamentos">💰 Orçamentos</a></li>
                 <li><a class="menu-link" data-page="config">⚙️ Config. Preços</a></li>
+                <li><a class="menu-link" data-page="clientes">👥 Clientes</a></li>
+                <li><a class="menu-link" data-page="agendamentos">📅 Agendamentos</a></li>
+                <li><a class="menu-link" data-page="materiais">🛠️ Materiais</a></li>
+                <li><a class="menu-link" data-page="financeiro">💵 Financeiro</a></li>
             </ul>
         </div>
 
         <!-- MAIN CONTENT -->
         <div class="main">
             <div class="header">
-                <h1 id="page-title">Orçamento Interativo 3D</h1>
+                <h1 id="page-title">Dashboard</h1>
                 <div style="font-size: 20px;">👤</div>
             </div>
 
             <div class="content">
-                <!-- ORÇAMENTOS INTERATIVO 3D -->
-                <div id="orcamentos" class="page active">
+                <!-- DASHBOARD -->
+                <div id="dashboard" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Carros em Produção</div>
+                            <div class="stat-value">8</div>
+                            <div class="stat-icon">🚗</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Orçamentos Pendentes</div>
+                            <div class="stat-value">5</div>
+                            <div class="stat-icon">📋</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Clientes</div>
+                            <div class="stat-value">32</div>
+                            <div class="stat-icon">👥</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Receita Mês</div>
+                            <div class="stat-value">R$ 28.500</div>
+                            <div class="stat-icon">💵</div>
+                        </div>
+                    </div>
+
                     <div class="section">
-                        <h2>Orçamento Interativo 3D</h2>
-                        <p style="color: #666; margin-bottom: 20px;">💡 Clique nas partes do carro 3D para selecionar</p>
+                        <h2>Carros em Andamento</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Placa</th>
+                                    <th>Cliente</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-1234</td>
+                                    <td>João Silva</td>
+                                    <td><span class="badge badge-pintando">Pintando</span></td>
+                                </tr>
+                                <tr>
+                                    <td>XYZ-5678</td>
+                                    <td>Maria Santos</td>
+                                    <td><span class="badge badge-producao">Em Produção</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DEF-9012</td>
+                                    <td>Pedro Costa</td>
+                                    <td><span class="badge badge-entregue">Entregue</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CARROS -->
+                <div id="carros" class="page">
+                    <div class="section">
+                        <h2>Gerenciar Carros</h2>
+                        <button class="btn btn-primary" onclick="toggleForm('form-carro')">+ Novo Carro</button>
+
+                        <div id="form-carro" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
+                            <h3 style="margin-bottom: 12px; font-size: 16px;">Adicionar Carro</h3>
+                            <div class="form-group">
+                                <label>Placa</label>
+                                <input type="text" placeholder="ABC-1234">
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente</label>
+                                <input type="text" placeholder="Nome do cliente">
+                            </div>
+                            <div class="form-group">
+                                <label>Modelo</label>
+                                <input type="text" placeholder="Ex: Honda Civic">
+                            </div>
+                            <div class="form-group">
+                                <label>Cor Original</label>
+                                <input type="text" placeholder="Cor do carro">
+                            </div>
+                            <div class="form-group">
+                                <label>Cor Desejada</label>
+                                <input type="text" placeholder="Nova cor">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select>
+                                    <option>Orçamento</option>
+                                    <option>Em Produção</option>
+                                    <option>Pintando</option>
+                                    <option>Entregue</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary">Salvar</button>
+                            <button class="btn btn-secondary" onclick="toggleForm('form-carro')" style="margin-left: 10px;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>Lista de Carros</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Placa</th>
+                                    <th>Modelo</th>
+                                    <th>Cliente</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-1234</td>
+                                    <td>Honda Civic</td>
+                                    <td>João Silva</td>
+                                    <td><span class="badge badge-pintando">Pintando</span></td>
+                                </tr>
+                                <tr>
+                                    <td>XYZ-5678</td>
+                                    <td>Toyota Corolla</td>
+                                    <td>Maria Santos</td>
+                                    <td><span class="badge badge-producao">Em Produção</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DEF-9012</td>
+                                    <td>Ford Fiesta</td>
+                                    <td>Pedro Costa</td>
+                                    <td><span class="badge badge-entregue">Entregue</span></td>
+                                </tr>
+                                <tr>
+                                    <td>GHI-3456</td>
+                                    <td>Volkswagen Gol</td>
+                                    <td>Ana Silva</td>
+                                    <td><span class="badge badge-orcamento">Orçamento</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ORÇAMENTOS INTERATIVO -->
+                <div id="orcamentos" class="page">
+                    <div class="section">
+                        <h2>Orçamento Interativo</h2>
+                        <p style="color: #666; margin-bottom: 20px;">💡 Selecione o modelo do carro e clique nas partes para adicionar ao orçamento</p>
                         
                         <!-- Seleção de Modelo de Carro -->
                         <div class="car-selection">
                             <h3 style="margin-bottom: 12px; color: #004E89; font-size: 16px;">Selecione o Modelo do Carro</h3>
                             <div class="car-models">
                                 <button class="car-model-btn active" onclick="selectCarModel('sedan', event)">🚗 Sedã</button>
-                                <button class="car-model-btn" onclick="selectCarModel('suv', event)">🚙 SUV</button>
+                                <button class="car-model-btn" onclick="selectCarModel('suv-small', event)">🚙 SUV Médio</button>
+                                <button class="car-model-btn" onclick="selectCarModel('suv-large', event)">🚐 SUV Grande</button>
+                                <button class="car-model-btn" onclick="selectCarModel('hatchback', event)">🚗 Hatchback</button>
                                 <button class="car-model-btn" onclick="selectCarModel('truck', event)">🚚 Camioneta</button>
                             </div>
                         </div>
 
                         <div class="budget-container">
-                            <!-- CAR VISUALIZATION 3D -->
+                            <!-- CAR VISUALIZATION -->
                             <div class="car-visualization">
-                                <h3 style="margin-bottom: 10px; color: #004E89;">Carro 3D - Clique nas Partes</h3>
-                                <canvas id="canvas-3d"></canvas>
-                                <p style="color: #999; font-size: 12px; margin-top: 10px;">Arraste para rotacionar | Clique para selecionar</p>
+                                <h3 style="margin-bottom: 10px; color: #004E89;">Clique nas Partes do Carro</h3>
+                                <div class="car-image-container" id="car-image-container">
+                                    <canvas id="car-canvas" class="car-image-canvas" width="450" height="300"></canvas>
+                                    <div id="part-label" class="part-label"></div>
+                                </div>
+                                <p style="color: #999; font-size: 12px; margin-top: 10px;">Clique nas partes para selecionar</p>
                             </div>
 
                             <!-- BUDGET SUMMARY -->
@@ -621,13 +1014,47 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="section" style="margin-top: 20px;">
+                        <h2>Orçamentos Pendentes</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Placa</th>
+                                    <th>Cliente</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-1234</td>
+                                    <td>João Silva</td>
+                                    <td>R$ 1.500</td>
+                                    <td><span class="badge badge-orcamento">Pendente</span></td>
+                                </tr>
+                                <tr>
+                                    <td>JKL-7890</td>
+                                    <td>Carlos Mendes</td>
+                                    <td>R$ 2.000</td>
+                                    <td><span class="badge badge-orcamento">Pendente</span></td>
+                                </tr>
+                                <tr>
+                                    <td>MNO-1234</td>
+                                    <td>Fernanda Lima</td>
+                                    <td>R$ 1.800</td>
+                                    <td><span class="badge badge-orcamento">Pendente</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- CONFIGURAR PREÇOS -->
                 <div id="config" class="page">
                     <div class="section">
                         <h2>Configurar Preços das Peças</h2>
-                        <p style="color: #666; margin-bottom: 20px;">Defina o valor de cada peça do carro.</p>
+                        <p style="color: #666; margin-bottom: 20px;">Defina o valor de cada peça do carro. Estes valores serão usados nos orçamentos.</p>
                         
                         <div class="price-config-container" id="price-config-container">
                             <!-- Será preenchido por JavaScript -->
@@ -636,14 +1063,147 @@
                         <button class="btn btn-primary" onclick="savePrices()" style="margin-top: 20px; width: 100%;">💾 Salvar Configurações</button>
                     </div>
                 </div>
+
+                <!-- CLIENTES -->
+                <div id="clientes" class="page">
+                    <div class="section">
+                        <h2>Gerenciar Clientes</h2>
+                        <button class="btn btn-primary" onclick="toggleForm('form-cliente')">+ Novo Cliente</button>
+
+                        <div id="form-cliente" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
+                            <h3 style="margin-bottom: 12px; font-size: 16px;">Adicionar Cliente</h3>
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" placeholder="Nome completo">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <input type="tel" placeholder="(11) 99999-9999">
+                            </div>
+                            <button class="btn btn-primary">Salvar</button>
+                            <button class="btn btn-secondary" onclick="toggleForm('form-cliente')" style="margin-left: 10px;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>Lista de Clientes</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>João Silva</td>
+                                    <td>joao@email.com</td>
+                                    <td>(11) 98765-4321</td>
+                                </tr>
+                                <tr>
+                                    <td>Maria Santos</td>
+                                    <td>maria@email.com</td>
+                                    <td>(11) 97654-3210</td>
+                                </tr>
+                                <tr>
+                                    <td>Pedro Costa</td>
+                                    <td>pedro@email.com</td>
+                                    <td>(11) 96543-2109</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- AGENDAMENTOS -->
+                <div id="agendamentos" class="page">
+                    <div class="section">
+                        <h2>Agendamentos</h2>
+                        <button class="btn btn-primary" onclick="toggleForm('form-agendamento')">+ Novo Agendamento</button>
+
+                        <div id="form-agendamento" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
+                            <h3 style="margin-bottom: 12px; font-size: 16px;">Novo Agendamento</h3>
+                            <div class="form-group">
+                                <label>Data</label>
+                                <input type="date">
+                            </div>
+                            <div class="form-group">
+                                <label>Hora</label>
+                                <input type="time">
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente</label>
+                                <input type="text" placeholder="Nome do cliente">
+                            </div>
+                            <button class="btn btn-primary">Salvar</button>
+                            <button class="btn btn-secondary" onclick="toggleForm('form-agendamento')" style="margin-left: 10px;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>Próximos Agendamentos</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Cliente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>20/02/2026</td>
+                                    <td>10:00</td>
+                                    <td>João Silva</td>
+                                </tr>
+                                <tr>
+                                    <td>21/02/2026</td>
+                                    <td>14:00</td>
+                                    <td>Maria Santos</td>
+                                </tr>
+                                <tr>
+                                    <td>22/02/2026</td>
+                                    <td>09:00</td>
+                                    <td>Pedro Costa</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MATERIAIS -->
+                <div id="materiais" class="page">
+                    <div class="section">
+                        <h2>Materiais</h2>
+                        <button class="btn btn-primary">+ Novo Material</button>
+                        <p style="margin-top: 16px; color: #999; font-size: 14px;">Seção de materiais em desenvolvimento...</p>
+                    </div>
+                </div>
+
+                <!-- FINANCEIRO -->
+                <div id="financeiro" class="page">
+                    <div class="section">
+                        <h2>Financeiro</h2>
+                        <button class="btn btn-primary">+ Nova Transação</button>
+                        <p style="margin-top: 16px; color: #999; font-size: 14px;">Seção financeira em desenvolvimento...</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- MOBILE MENU -->
         <ul class="mobile-menu">
             <li class="mobile-menu-items" style="list-style: none; display: flex; width: 100%; height: 100%; margin: 0; padding: 0;">
-                <a class="menu-link active" data-page="orcamentos" style="flex: 1;"><span>💰</span><span>Orçamento</span></a>
-                <a class="menu-link" data-page="config" style="flex: 1;"><span>⚙️</span><span>Preços</span></a>
+                <a class="menu-link active" data-page="dashboard" style="flex: 1;"><span>📊</span><span>Dashboard</span></a>
+                <a class="menu-link" data-page="carros" style="flex: 1;"><span>🚗</span><span>Carros</span></a>
+                <a class="menu-link" data-page="orcamentos" style="flex: 1;"><span>💰</span><span>Orçamentos</span></a>
+                <a class="menu-link" data-page="clientes" style="flex: 1;"><span>👥</span><span>Clientes</span></a>
+                <a class="menu-link" data-page="agendamentos" style="flex: 1;"><span>📅</span><span>Agenda</span></a>
             </li>
         </ul>
     </div>
@@ -668,13 +1228,17 @@
             'mirror-right': 'Espelho Direito'
         };
 
+        const carImages = {
+            'sedan': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663278042285/kYuniRYmQQzJSYkz.jpg',
+            'suv-small': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663278042285/NSSekvAlBoBUaOuZ.jpg',
+            'suv-large': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663278042285/vSIvybPRlugJkEGU.jpg',
+            'hatchback': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663278042285/bofAHaUHNPFeDIlX.jpg',
+            'truck': 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663278042285/JAYvWjzfzuVvFLlD.jpg'
+        };
+
         let prices = {};
         let selectedParts = {};
         let currentCarModel = 'sedan';
-        let scene, camera, renderer, carGroup;
-        let carParts3D = {};
-        let raycaster = new THREE.Raycaster();
-        let mouse = new THREE.Vector2();
 
         // Inicializar preços padrão
         function initializePrices() {
@@ -721,280 +1285,76 @@
             alert('✅ Preços salvos com sucesso!');
         }
 
-        // ===== THREE.JS 3D SETUP =====
-        function initThreeJS() {
-            const canvas = document.getElementById('canvas-3d');
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xf5f5f5);
-
-            camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-            camera.position.set(0, 1, 3);
-
-            renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(5, 10, 7);
-            scene.add(directionalLight);
-
-            // Criar grupo do carro
-            carGroup = new THREE.Group();
-            scene.add(carGroup);
-
-            // Criar carro
-            createCar(currentCarModel);
-
-            // Mouse click listener
-            canvas.addEventListener('click', onCanvasClick);
-
-            // Render loop
-            animate();
-        }
-
-        function createCar(model) {
-            carGroup.clear();
-            carParts3D = {};
-
-            const carColor = 0xff4444;
-
-            if (model === 'sedan') {
-                // Chassis
-                const chassis = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 1, 4),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                chassis.position.y = 0.5;
-                chassis.userData.partId = 'side-left';
-                carGroup.add(chassis);
-                carParts3D['side-left'] = chassis;
-
-                // Hood
-                const hood = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 0.3, 1),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                hood.position.set(0, 1, -1.5);
-                hood.userData.partId = 'hood';
-                carGroup.add(hood);
-                carParts3D['hood'] = hood;
-
-                // Trunk
-                const trunk = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 0.3, 1),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                trunk.position.set(0, 1, 1.5);
-                trunk.userData.partId = 'trunk';
-                carGroup.add(trunk);
-                carParts3D['trunk'] = trunk;
-
-                // Roof
-                const roof = new THREE.Mesh(
-                    new THREE.BoxGeometry(1.8, 0.3, 2),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                roof.position.set(0, 1.5, 0);
-                roof.userData.partId = 'roof';
-                carGroup.add(roof);
-                carParts3D['roof'] = roof;
-
-                // Doors
-                const doorLeft = new THREE.Mesh(
-                    new THREE.BoxGeometry(0.1, 0.8, 1),
-                    new THREE.MeshPhongMaterial({ color: 0x0088ff })
-                );
-                doorLeft.position.set(-1.05, 0.9, -0.3);
-                doorLeft.userData.partId = 'door-left';
-                carGroup.add(doorLeft);
-                carParts3D['door-left'] = doorLeft;
-
-                const doorRight = new THREE.Mesh(
-                    new THREE.BoxGeometry(0.1, 0.8, 1),
-                    new THREE.MeshPhongMaterial({ color: 0x0088ff })
-                );
-                doorRight.position.set(1.05, 0.9, -0.3);
-                doorRight.userData.partId = 'door-right';
-                carGroup.add(doorRight);
-                carParts3D['door-right'] = doorRight;
-
-                // Bumpers
-                const bumperFront = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 0.2, 0.3),
-                    new THREE.MeshPhongMaterial({ color: 0x333333 })
-                );
-                bumperFront.position.set(0, 0.3, -2.2);
-                bumperFront.userData.partId = 'bumper-front';
-                carGroup.add(bumperFront);
-                carParts3D['bumper-front'] = bumperFront;
-
-                const bumperRear = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 0.2, 0.3),
-                    new THREE.MeshPhongMaterial({ color: 0x333333 })
-                );
-                bumperRear.position.set(0, 0.3, 2.2);
-                bumperRear.userData.partId = 'bumper-rear';
-                carGroup.add(bumperRear);
-                carParts3D['bumper-rear'] = bumperRear;
-
-                // Wheels
-                for (let i = 0; i < 4; i++) {
-                    const wheel = new THREE.Mesh(
-                        new THREE.CylinderGeometry(0.4, 0.4, 0.2, 16),
-                        new THREE.MeshPhongMaterial({ color: 0x222222 })
-                    );
-                    wheel.rotation.z = Math.PI / 2;
-                    wheel.position.set(i < 2 ? -1 : 1, 0.4, i % 2 === 0 ? -1.2 : 1.2);
-                    carGroup.add(wheel);
-                }
-            } else if (model === 'suv') {
-                // SUV é maior
-                const chassis = new THREE.Mesh(
-                    new THREE.BoxGeometry(2.2, 1.2, 4.5),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                chassis.position.y = 0.6;
-                chassis.userData.partId = 'side-left';
-                carGroup.add(chassis);
-                carParts3D['side-left'] = chassis;
-
-                // Roof
-                const roof = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 0.3, 2.5),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                roof.position.set(0, 1.8, 0);
-                roof.userData.partId = 'roof';
-                carGroup.add(roof);
-                carParts3D['roof'] = roof;
-
-                // Doors
-                const doorLeft = new THREE.Mesh(
-                    new THREE.BoxGeometry(0.1, 1, 1.2),
-                    new THREE.MeshPhongMaterial({ color: 0x0088ff })
-                );
-                doorLeft.position.set(-1.15, 1.1, -0.5);
-                doorLeft.userData.partId = 'door-left';
-                carGroup.add(doorLeft);
-                carParts3D['door-left'] = doorLeft;
-
-                const doorRight = new THREE.Mesh(
-                    new THREE.BoxGeometry(0.1, 1, 1.2),
-                    new THREE.MeshPhongMaterial({ color: 0x0088ff })
-                );
-                doorRight.position.set(1.15, 1.1, -0.5);
-                doorRight.userData.partId = 'door-right';
-                carGroup.add(doorRight);
-                carParts3D['door-right'] = doorRight;
-
-                // Bumpers
-                const bumperFront = new THREE.Mesh(
-                    new THREE.BoxGeometry(2.2, 0.3, 0.4),
-                    new THREE.MeshPhongMaterial({ color: 0x333333 })
-                );
-                bumperFront.position.set(0, 0.4, -2.4);
-                bumperFront.userData.partId = 'bumper-front';
-                carGroup.add(bumperFront);
-                carParts3D['bumper-front'] = bumperFront;
-
-                // Wheels
-                for (let i = 0; i < 4; i++) {
-                    const wheel = new THREE.Mesh(
-                        new THREE.CylinderGeometry(0.5, 0.5, 0.25, 16),
-                        new THREE.MeshPhongMaterial({ color: 0x222222 })
-                    );
-                    wheel.rotation.z = Math.PI / 2;
-                    wheel.position.set(i < 2 ? -1.1 : 1.1, 0.5, i % 2 === 0 ? -1.4 : 1.4);
-                    carGroup.add(wheel);
-                }
-            } else if (model === 'truck') {
-                // Truck cabin
-                const cabin = new THREE.Mesh(
-                    new THREE.BoxGeometry(1.8, 1, 1.5),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                cabin.position.set(0, 0.6, -1.5);
-                cabin.userData.partId = 'hood';
-                carGroup.add(cabin);
-                carParts3D['hood'] = cabin;
-
-                // Truck bed
-                const bed = new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 0.8, 3),
-                    new THREE.MeshPhongMaterial({ color: carColor })
-                );
-                bed.position.set(0, 0.5, 1);
-                bed.userData.partId = 'trunk';
-                carGroup.add(bed);
-                carParts3D['trunk'] = bed;
-
-                // Bumpers
-                const bumperFront = new THREE.Mesh(
-                    new THREE.BoxGeometry(1.8, 0.2, 0.3),
-                    new THREE.MeshPhongMaterial({ color: 0x333333 })
-                );
-                bumperFront.position.set(0, 0.3, -2.2);
-                bumperFront.userData.partId = 'bumper-front';
-                carGroup.add(bumperFront);
-                carParts3D['bumper-front'] = bumperFront;
-
-                // Wheels
-                for (let i = 0; i < 4; i++) {
-                    const wheel = new THREE.Mesh(
-                        new THREE.CylinderGeometry(0.5, 0.5, 0.3, 16),
-                        new THREE.MeshPhongMaterial({ color: 0x222222 })
-                    );
-                    wheel.rotation.z = Math.PI / 2;
-                    wheel.position.set(i < 2 ? -1 : 1, 0.5, i % 2 === 0 ? -1 : 1.5);
-                    carGroup.add(wheel);
-                }
-            }
-        }
-
-        function onCanvasClick(event) {
-            const canvas = document.getElementById('canvas-3d');
-            const rect = canvas.getBoundingClientRect();
-            mouse.x = ((event.clientX - rect.left) / canvas.clientWidth) * 2 - 1;
-            mouse.y = -((event.clientY - rect.top) / canvas.clientHeight) * 2 + 1;
-
-            raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects(carGroup.children);
-
-            if (intersects.length > 0) {
-                const obj = intersects[0].object;
-                if (obj.userData.partId) {
-                    const partId = obj.userData.partId;
-                    const partName = carParts[partId];
-                    const partPrice = prices[partId] || 0;
-
-                    if (selectedParts[partId]) {
-                        delete selectedParts[partId];
-                        obj.material.emissive.setHex(0x000000);
-                    } else {
-                        selectedParts[partId] = { name: partName, price: partPrice };
-                        obj.material.emissive.setHex(0xFF6B35);
-                    }
-
-                    updateBudgetDisplay();
-                }
-            }
-        }
-
+        // Selecionar modelo de carro
         function selectCarModel(model, event) {
             currentCarModel = model;
             selectedParts = {};
-
+            
             document.querySelectorAll('.car-model-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-
-            createCar(model);
+            
+            drawCarOnCanvas();
             updateBudgetDisplay();
         }
+        
+        function drawCarOnCanvas() {
+            const canvas = document.getElementById('car-canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                drawSelectedParts(ctx, canvas);
+            };
+            
+            img.src = carImages[currentCarModel];
+        }
+        
+        function drawSelectedParts(ctx, canvas) {
+            Object.entries(selectedParts).forEach(([partId, part]) => {
+                const area = getPartArea(partId, canvas);
+                if (area) {
+                    ctx.fillStyle = 'rgba(255, 107, 53, 0.3)';
+                    ctx.fillRect(area.x, area.y, area.width, area.height);
+                    ctx.strokeStyle = '#FF6B35';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(area.x, area.y, area.width, area.height);
+                }
+            });
+        }
+        
+        function getPartArea(partId, canvas) {
+            const w = canvas.width;
+            const h = canvas.height;
+            const areas = {
+                'bumper-front': { x: w*0.10, y: h*0.75, width: w*0.25, height: h*0.08 },
+                'bumper-rear': { x: w*0.65, y: h*0.75, width: w*0.25, height: h*0.08 },
+                'door-left': { x: w*0.15, y: h*0.45, width: w*0.20, height: h*0.30 },
+                'door-right': { x: w*0.65, y: h*0.45, width: w*0.20, height: h*0.30 },
+                'roof': { x: w*0.30, y: h*0.15, width: w*0.40, height: h*0.25 },
+                'hood': { x: w*0.10, y: h*0.25, width: w*0.20, height: h*0.20 },
+                'trunk': { x: w*0.70, y: h*0.25, width: w*0.20, height: h*0.20 },
+                'side-left': { x: w*0.05, y: h*0.45, width: w*0.08, height: h*0.30 },
+                'side-right': { x: w*0.87, y: h*0.45, width: w*0.08, height: h*0.30 },
+                'window-fl': { x: w*0.18, y: h*0.30, width: w*0.12, height: h*0.12 },
+                'window-fr': { x: w*0.70, y: h*0.30, width: w*0.12, height: h*0.12 },
+                'window-rl': { x: w*0.40, y: h*0.35, width: w*0.10, height: h*0.10 },
+                'window-rr': { x: w*0.50, y: h*0.35, width: w*0.10, height: h*0.10 },
+                'mirror-left': { x: w*0.02, y: h*0.35, width: w*0.06, height: h*0.10 },
+                'mirror-right': { x: w*0.92, y: h*0.35, width: w*0.06, height: h*0.10 }
+            };
+            return areas[partId];
+        }
+        
+        function isClickInArea(x, y, area) {
+            return x >= area.x && x <= area.x + area.width &&
+                   y >= area.y && y <= area.y + area.height;
+        }
 
+
+
+        // Atualizar display do orçamento
         function updateBudgetDisplay() {
             const partsArray = Object.entries(selectedParts);
             const total = partsArray.reduce((sum, [, part]) => sum + part.price, 0);
@@ -1020,22 +1380,19 @@
             }
         }
 
+        // Remover parte individual
         function removePart(partId) {
             delete selectedParts[partId];
-            if (carParts3D[partId]) {
-                carParts3D[partId].material.emissive.setHex(0x000000);
-            }
             updateBudgetDisplay();
         }
 
+        // Limpar todas as partes
         function clearAllParts() {
             selectedParts = {};
-            Object.values(carParts3D).forEach(part => {
-                part.material.emissive.setHex(0x000000);
-            });
             updateBudgetDisplay();
         }
 
+        // Salvar orçamento
         function saveBudget() {
             const clientName = document.getElementById('client-name').value;
             const carPlate = document.getElementById('car-plate').value;
@@ -1071,50 +1428,76 @@
             clearAllParts();
         }
 
-        function animate() {
-            requestAnimationFrame(animate);
-            carGroup.rotation.y += 0.005;
-            renderer.render(scene, camera);
-        }
-
         // Navegação
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-
+                
                 document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-
+                
                 this.classList.add('active');
                 const pageId = this.getAttribute('data-page');
                 document.getElementById(pageId).classList.add('active');
-
+                
                 const titles = {
-                    'orcamentos': 'Orçamento Interativo 3D',
-                    'config': 'Configurar Preços'
+                    'dashboard': 'Dashboard',
+                    'carros': 'Gerenciar Carros',
+                    'orcamentos': 'Orçamentos',
+                    'config': 'Configurar Preços',
+                    'clientes': 'Clientes',
+                    'agendamentos': 'Agendamentos',
+                    'materiais': 'Materiais',
+                    'financeiro': 'Financeiro'
                 };
                 document.getElementById('page-title').textContent = titles[pageId];
             });
+        });
+
+        // Toggle formulários
+        function toggleForm(formId) {
+            const form = document.getElementById(formId);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Listener de clique no canvas
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('car-canvas');
+            if (canvas) {
+                canvas.addEventListener('click', function(e) {
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    Object.entries(carParts).forEach(([partId, name]) => {
+                        const area = getPartArea(partId, canvas);
+                        if (area && isClickInArea(x, y, area)) {
+                            const price = prices[partId] || 0;
+                            
+                            if (selectedParts[partId]) {
+                                delete selectedParts[partId];
+                            } else {
+                                selectedParts[partId] = { name: name, price: price };
+                            }
+                            
+                            drawCarOnCanvas();
+                            updateBudgetDisplay();
+                        }
+                    });
+                });
+            }
         });
 
         // Inicializar
         window.addEventListener('DOMContentLoaded', function() {
             initializePrices();
             renderPriceConfig();
-            initThreeJS();
+            drawCarOnCanvas();
         });
 
-        // Resize handler
-        window.addEventListener('resize', function() {
-            const canvas = document.getElementById('canvas-3d');
-            if (canvas && renderer) {
-                const width = canvas.clientWidth;
-                const height = canvas.clientHeight;
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-                renderer.setSize(width, height);
-            }
-        });
+
+
+
     </script>
 </body>
 </html>
