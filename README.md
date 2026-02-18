@@ -1,2 +1,0 @@
-# garagem
-oficina de pintura
