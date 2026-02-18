@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oficina de Pintura - Sistema de Gerenciamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Oficina de Pintura</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,12 +12,12 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
         }
 
         body {
@@ -26,52 +26,55 @@
             color: #333;
         }
 
-        .container {
+        .app {
             display: flex;
             height: 100vh;
             width: 100%;
         }
 
+        /* DESKTOP SIDEBAR */
         .sidebar {
-            width: 250px;
+            width: 280px;
             background: linear-gradient(135deg, #004E89 0%, #003d6b 100%);
             color: white;
             padding: 20px;
             overflow-y: auto;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 2px solid rgba(255,255,255,0.2);
         }
 
         .sidebar-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background-color: #FF6B35;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             flex-shrink: 0;
         }
 
         .sidebar-title {
             font-family: 'Playfair Display', serif;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             line-height: 1.2;
         }
 
         .sidebar-menu {
             list-style: none;
+            flex: 1;
         }
 
         .sidebar-menu li {
@@ -81,14 +84,14 @@
         .sidebar-menu a {
             color: white;
             text-decoration: none;
-            padding: 12px 15px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-radius: 6px;
+            gap: 12px;
+            border-radius: 8px;
             transition: all 0.3s ease;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
             white-space: nowrap;
         }
 
@@ -98,17 +101,16 @@
             transform: translateX(5px);
         }
 
-        .main-content {
+        .main {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            width: 100%;
         }
 
         .header {
             background: white;
-            padding: 15px 20px;
+            padding: 16px 20px;
             border-bottom: 2px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
@@ -119,24 +121,14 @@
 
         .header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 24px;
+            font-size: 26px;
             color: #004E89;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #004E89;
-            font-size: 24px;
-            cursor: pointer;
         }
 
         .content {
             flex: 1;
             overflow-y: auto;
             padding: 20px;
-            width: 100%;
         }
 
         .page {
@@ -149,18 +141,18 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
             margin-bottom: 20px;
         }
 
         .stat-card {
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border-left: 4px solid #FF6B35;
-            transition: transform 0.3s ease;
+            border-left: 5px solid #FF6B35;
+            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -172,18 +164,19 @@
         .stat-label {
             font-size: 13px;
             color: #999;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .stat-value {
             font-family: 'Playfair Display', serif;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             color: #004E89;
         }
 
         .stat-icon {
-            font-size: 24px;
+            font-size: 28px;
             position: absolute;
             top: 15px;
             right: 15px;
@@ -192,25 +185,25 @@
         .section {
             background: white;
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            border-radius: 12px;
+            margin-bottom: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
         .section h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            margin-bottom: 15px;
+            font-size: 24px;
+            margin-bottom: 16px;
             color: #004E89;
         }
 
         .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: 500;
             color: #333;
             font-size: 14px;
@@ -220,9 +213,9 @@
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 10px;
+            padding: 11px;
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
         }
@@ -236,14 +229,14 @@
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 11px 22px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .btn-primary {
@@ -269,8 +262,8 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 13px;
+            margin-top: 16px;
+            font-size: 14px;
         }
 
         .table thead {
@@ -279,14 +272,14 @@
         }
 
         .table th {
-            padding: 10px;
+            padding: 12px;
             text-align: left;
             font-weight: 600;
             color: #004E89;
         }
 
         .table td {
-            padding: 10px;
+            padding: 12px;
             border-bottom: 1px solid #e0e0e0;
         }
 
@@ -296,101 +289,135 @@
 
         .badge {
             display: inline-block;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
         }
 
-        .badge-success {
-            background-color: #d4edda;
-            color: #155724;
+        .badge-orcamento {
+            background-color: #e3f2fd;
+            color: #1565c0;
         }
 
-        .badge-warning {
-            background-color: #fff3cd;
-            color: #856404;
+        .badge-producao {
+            background-color: #fff3e0;
+            color: #e65100;
         }
 
-        .badge-danger {
-            background-color: #f8d7da;
-            color: #721c24;
+        .badge-pintando {
+            background-color: #f3e5f5;
+            color: #6a1b9a;
         }
 
-        .chart-placeholder {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-            height: 250px;
-            border-radius: 10px;
+        .badge-entregue {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-timeline {
             display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            background-color: #f0f0f0;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .status-item.active {
+            background-color: #FF6B35;
+            color: white;
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: white;
+            border-top: 2px solid #e0e0e0;
+            z-index: 999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu-items {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            list-style: none;
+        }
+
+        .mobile-menu-items a {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #999;
-            font-size: 14px;
+            gap: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 11px;
+            cursor: pointer;
+            flex: 1;
+            height: 100%;
+            transition: all 0.3s ease;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .mobile-menu-items a.active {
+            color: #FF6B35;
+            background-color: #fff5f0;
         }
 
-        /* RESPONSIVE MOBILE */
+        .mobile-menu-items a span:first-child {
+            font-size: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 16px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .container {
+            .app {
                 flex-direction: column;
             }
 
             .sidebar {
-                width: 100%;
-                padding: 15px;
-                max-height: 60px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                overflow: visible;
-                position: relative;
-                z-index: 1000;
-            }
-
-            .sidebar.open {
-                max-height: none;
-                flex-direction: column;
-                padding: 15px;
-            }
-
-            .sidebar-header {
-                margin-bottom: 0;
-                padding-bottom: 0;
-                border-bottom: none;
-            }
-
-            .sidebar-title {
                 display: none;
             }
 
-            .sidebar-menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                margin-top: 15px;
-            }
-
-            .sidebar.open .sidebar-menu {
-                display: flex;
-            }
-
-            .sidebar-menu a {
-                width: 100%;
-                justify-content: flex-start;
-                white-space: normal;
-            }
-
-            .menu-toggle {
+            .mobile-menu {
                 display: block;
             }
 
+            .main {
+                padding-bottom: 70px;
+            }
+
             .header {
-                padding: 12px 15px;
+                padding: 14px 16px;
             }
 
             .header h1 {
@@ -398,45 +425,31 @@
             }
 
             .content {
-                padding: 15px;
+                padding: 14px;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 12px;
-                margin-bottom: 15px;
+                margin-bottom: 14px;
             }
 
             .stat-card {
-                padding: 15px;
+                padding: 16px;
             }
 
             .stat-value {
-                font-size: 24px;
-            }
-
-            .stat-label {
-                font-size: 12px;
-            }
-
-            .grid-2 {
-                grid-template-columns: 1fr;
-                gap: 12px;
+                font-size: 28px;
             }
 
             .section {
-                padding: 15px;
+                padding: 16px;
                 margin-bottom: 12px;
             }
 
             .section h2 {
-                font-size: 18px;
+                font-size: 20px;
                 margin-bottom: 12px;
-            }
-
-            .chart-placeholder {
-                height: 200px;
-                font-size: 12px;
             }
 
             .table {
@@ -449,14 +462,19 @@
             }
 
             .btn {
-                padding: 8px 16px;
-                font-size: 12px;
+                padding: 10px 18px;
+                font-size: 13px;
             }
 
             .form-group input,
             .form-group textarea,
             .form-group select {
                 font-size: 16px;
+            }
+
+            .badge {
+                font-size: 11px;
+                padding: 5px 10px;
             }
         }
 
@@ -466,7 +484,7 @@
             }
 
             .content {
-                padding: 10px;
+                padding: 12px;
             }
 
             .stats-grid {
@@ -474,20 +492,24 @@
             }
 
             .stat-card {
-                padding: 12px;
+                padding: 14px;
             }
 
             .stat-value {
-                font-size: 20px;
+                font-size: 24px;
+            }
+
+            .stat-label {
+                font-size: 12px;
             }
 
             .section {
-                padding: 12px;
+                padding: 14px;
                 margin-bottom: 10px;
             }
 
             .section h2 {
-                font-size: 16px;
+                font-size: 18px;
             }
 
             .table {
@@ -500,118 +522,268 @@
             }
 
             .btn {
-                padding: 8px 12px;
+                padding: 9px 16px;
+                font-size: 12px;
+                width: 100%;
+            }
+
+            .status-timeline {
+                gap: 6px;
+            }
+
+            .status-item {
+                padding: 6px 10px;
                 font-size: 11px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- SIDEBAR -->
-        <div class="sidebar" id="sidebar">
-            <div style="display: flex; align-items: center; gap: 10px;">
+    <div class="app">
+        <!-- SIDEBAR DESKTOP -->
+        <div class="sidebar">
+            <div class="sidebar-header">
                 <div class="sidebar-icon">🎨</div>
-                <div class="sidebar-title">Oficina Pintura</div>
+                <div class="sidebar-title">Oficina<br>Pintura</div>
             </div>
-            <button class="menu-toggle" id="menu-toggle">☰</button>
             <ul class="sidebar-menu">
                 <li><a class="menu-link active" data-page="dashboard">📊 Dashboard</a></li>
+                <li><a class="menu-link" data-page="carros">🚗 Carros</a></li>
+                <li><a class="menu-link" data-page="orcamentos">💰 Orçamentos</a></li>
                 <li><a class="menu-link" data-page="clientes">👥 Clientes</a></li>
                 <li><a class="menu-link" data-page="agendamentos">📅 Agendamentos</a></li>
-                <li><a class="menu-link" data-page="projetos">🎨 Projetos</a></li>
                 <li><a class="menu-link" data-page="materiais">🛠️ Materiais</a></li>
-                <li><a class="menu-link" data-page="financeiro">💰 Financeiro</a></li>
-                <li><a class="menu-link" data-page="relatorios">📈 Relatórios</a></li>
+                <li><a class="menu-link" data-page="financeiro">💵 Financeiro</a></li>
             </ul>
         </div>
 
         <!-- MAIN CONTENT -->
-        <div class="main-content">
+        <div class="main">
             <div class="header">
                 <h1 id="page-title">Dashboard</h1>
-                <div style="font-size: 18px;">👤</div>
+                <div style="font-size: 20px;">👤</div>
             </div>
 
             <div class="content">
-                <!-- DASHBOARD PAGE -->
+                <!-- DASHBOARD -->
                 <div id="dashboard" class="page active">
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-label">Agendamentos Próximos</div>
-                            <div class="stat-value">12</div>
-                            <div class="stat-icon">📅</div>
+                            <div class="stat-label">Carros em Produção</div>
+                            <div class="stat-value">8</div>
+                            <div class="stat-icon">🚗</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Projetos em Andamento</div>
+                            <div class="stat-label">Orçamentos Pendentes</div>
                             <div class="stat-value">5</div>
-                            <div class="stat-icon">🎨</div>
+                            <div class="stat-icon">📋</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Clientes Total</div>
-                            <div class="stat-value">48</div>
+                            <div class="stat-label">Clientes</div>
+                            <div class="stat-value">32</div>
                             <div class="stat-icon">👥</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Receita Mês</div>
-                            <div class="stat-value">R$ 15.200</div>
+                            <div class="stat-value">R$ 28.500</div>
                             <div class="stat-icon">💵</div>
                         </div>
                     </div>
 
-                    <div class="grid-2">
-                        <div class="section">
-                            <h2>Receita vs Despesa</h2>
-                            <div class="chart-placeholder">Gráfico de Receita</div>
-                        </div>
-                        <div class="section">
-                            <h2>Status dos Projetos</h2>
-                            <div class="chart-placeholder">Gráfico de Status</div>
-                        </div>
-                    </div>
-
                     <div class="section">
-                        <h2>Projetos Recentes</h2>
+                        <h2>Carros em Andamento</h2>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Projeto</th>
+                                    <th>Placa</th>
                                     <th>Cliente</th>
-                                    <th>Progresso</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Pintura Sala</td>
+                                    <td>ABC-1234</td>
                                     <td>João Silva</td>
-                                    <td>75%</td>
-                                    <td><span class="badge badge-warning">Andando</span></td>
+                                    <td><span class="badge badge-pintando">Pintando</span></td>
                                 </tr>
                                 <tr>
-                                    <td>Pintura Cozinha</td>
+                                    <td>XYZ-5678</td>
                                     <td>Maria Santos</td>
-                                    <td>100%</td>
-                                    <td><span class="badge badge-success">Concluído</span></td>
+                                    <td><span class="badge badge-producao">Em Produção</span></td>
                                 </tr>
                                 <tr>
-                                    <td>Pintura Quarto</td>
+                                    <td>DEF-9012</td>
                                     <td>Pedro Costa</td>
-                                    <td>30%</td>
-                                    <td><span class="badge badge-warning">Andando</span></td>
+                                    <td><span class="badge badge-entregue">Entregue</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- CLIENTES PAGE -->
+                <!-- CARROS -->
+                <div id="carros" class="page">
+                    <div class="section">
+                        <h2>Gerenciar Carros</h2>
+                        <button class="btn btn-primary" onclick="toggleForm('form-carro')">+ Novo Carro</button>
+
+                        <div id="form-carro" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
+                            <h3 style="margin-bottom: 12px; font-size: 16px;">Adicionar Carro</h3>
+                            <div class="form-group">
+                                <label>Placa</label>
+                                <input type="text" placeholder="ABC-1234">
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente</label>
+                                <input type="text" placeholder="Nome do cliente">
+                            </div>
+                            <div class="form-group">
+                                <label>Modelo</label>
+                                <input type="text" placeholder="Ex: Honda Civic">
+                            </div>
+                            <div class="form-group">
+                                <label>Cor Original</label>
+                                <input type="text" placeholder="Cor do carro">
+                            </div>
+                            <div class="form-group">
+                                <label>Cor Desejada</label>
+                                <input type="text" placeholder="Nova cor">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select>
+                                    <option>Orçamento</option>
+                                    <option>Em Produção</option>
+                                    <option>Pintando</option>
+                                    <option>Entregue</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary">Salvar</button>
+                            <button class="btn btn-secondary" onclick="toggleForm('form-carro')" style="margin-left: 10px;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>Lista de Carros</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Placa</th>
+                                    <th>Modelo</th>
+                                    <th>Cliente</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-1234</td>
+                                    <td>Honda Civic</td>
+                                    <td>João Silva</td>
+                                    <td><span class="badge badge-pintando">Pintando</span></td>
+                                </tr>
+                                <tr>
+                                    <td>XYZ-5678</td>
+                                    <td>Toyota Corolla</td>
+                                    <td>Maria Santos</td>
+                                    <td><span class="badge badge-producao">Em Produção</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DEF-9012</td>
+                                    <td>Ford Fiesta</td>
+                                    <td>Pedro Costa</td>
+                                    <td><span class="badge badge-entregue">Entregue</span></td>
+                                </tr>
+                                <tr>
+                                    <td>GHI-3456</td>
+                                    <td>Volkswagen Gol</td>
+                                    <td>Ana Silva</td>
+                                    <td><span class="badge badge-orcamento">Orçamento</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ORÇAMENTOS -->
+                <div id="orcamentos" class="page">
+                    <div class="section">
+                        <h2>Gerenciar Orçamentos</h2>
+                        <button class="btn btn-primary" onclick="toggleForm('form-orcamento')">+ Novo Orçamento</button>
+
+                        <div id="form-orcamento" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
+                            <h3 style="margin-bottom: 12px; font-size: 16px;">Novo Orçamento</h3>
+                            <div class="form-group">
+                                <label>Placa do Carro</label>
+                                <input type="text" placeholder="ABC-1234">
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente</label>
+                                <input type="text" placeholder="Nome do cliente">
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de Pintura</label>
+                                <select>
+                                    <option>Pintura Simples</option>
+                                    <option>Pintura Metálica</option>
+                                    <option>Pintura Pérola</option>
+                                    <option>Pintura Customizada</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Valor do Orçamento</label>
+                                <input type="text" placeholder="R$ 0,00">
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <textarea placeholder="Detalhes do orçamento" rows="3"></textarea>
+                            </div>
+                            <button class="btn btn-primary">Salvar</button>
+                            <button class="btn btn-secondary" onclick="toggleForm('form-orcamento')" style="margin-left: 10px;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2>Orçamentos Pendentes</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Placa</th>
+                                    <th>Cliente</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ABC-1234</td>
+                                    <td>João Silva</td>
+                                    <td>R$ 1.500</td>
+                                    <td><span class="badge badge-orcamento">Pendente</span></td>
+                                </tr>
+                                <tr>
+                                    <td>JKL-7890</td>
+                                    <td>Carlos Mendes</td>
+                                    <td>R$ 2.000</td>
+                                    <td><span class="badge badge-orcamento">Pendente</span></td>
+                                </tr>
+                                <tr>
+                                    <td>MNO-1234</td>
+                                    <td>Fernanda Lima</td>
+                                    <td>R$ 1.800</td>
+                                    <td><span class="badge badge-orcamento">Pendente</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CLIENTES -->
                 <div id="clientes" class="page">
                     <div class="section">
                         <h2>Gerenciar Clientes</h2>
                         <button class="btn btn-primary" onclick="toggleForm('form-cliente')">+ Novo Cliente</button>
 
-                        <div id="form-cliente" style="display:none; margin-top: 15px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                        <div id="form-cliente" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
                             <h3 style="margin-bottom: 12px; font-size: 16px;">Adicionar Cliente</h3>
                             <div class="form-group">
                                 <label>Nome</label>
@@ -624,10 +796,6 @@
                             <div class="form-group">
                                 <label>Telefone</label>
                                 <input type="tel" placeholder="(11) 99999-9999">
-                            </div>
-                            <div class="form-group">
-                                <label>Endereço</label>
-                                <textarea placeholder="Endereço completo" rows="3"></textarea>
                             </div>
                             <button class="btn btn-primary">Salvar</button>
                             <button class="btn btn-secondary" onclick="toggleForm('form-cliente')" style="margin-left: 10px;">Cancelar</button>
@@ -665,23 +833,14 @@
                     </div>
                 </div>
 
-                <!-- AGENDAMENTOS PAGE -->
+                <!-- AGENDAMENTOS -->
                 <div id="agendamentos" class="page">
                     <div class="section">
-                        <h2>Gerenciar Agendamentos</h2>
+                        <h2>Agendamentos</h2>
                         <button class="btn btn-primary" onclick="toggleForm('form-agendamento')">+ Novo Agendamento</button>
 
-                        <div id="form-agendamento" style="display:none; margin-top: 15px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                        <div id="form-agendamento" style="display:none; margin-top: 16px; padding: 16px; background: #f9f9f9; border-radius: 8px;">
                             <h3 style="margin-bottom: 12px; font-size: 16px;">Novo Agendamento</h3>
-                            <div class="form-group">
-                                <label>Cliente</label>
-                                <select>
-                                    <option>Selecione um cliente</option>
-                                    <option>João Silva</option>
-                                    <option>Maria Santos</option>
-                                    <option>Pedro Costa</option>
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label>Data</label>
                                 <input type="date">
@@ -691,8 +850,8 @@
                                 <input type="time">
                             </div>
                             <div class="form-group">
-                                <label>Serviço</label>
-                                <input type="text" placeholder="Ex: Pintura de Sala">
+                                <label>Cliente</label>
+                                <input type="text" placeholder="Nome do cliente">
                             </div>
                             <button class="btn btn-primary">Salvar</button>
                             <button class="btn btn-secondary" onclick="toggleForm('form-agendamento')" style="margin-left: 10px;">Cancelar</button>
@@ -700,115 +859,86 @@
                     </div>
 
                     <div class="section">
-                        <h2>Agendamentos</h2>
+                        <h2>Próximos Agendamentos</h2>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Cliente</th>
                                     <th>Data</th>
-                                    <th>Status</th>
+                                    <th>Hora</th>
+                                    <th>Cliente</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>20/02/2026</td>
+                                    <td>10:00</td>
                                     <td>João Silva</td>
-                                    <td>20/02</td>
-                                    <td><span class="badge badge-success">OK</span></td>
                                 </tr>
                                 <tr>
+                                    <td>21/02/2026</td>
+                                    <td>14:00</td>
                                     <td>Maria Santos</td>
-                                    <td>21/02</td>
-                                    <td><span class="badge badge-warning">Pendente</span></td>
                                 </tr>
                                 <tr>
+                                    <td>22/02/2026</td>
+                                    <td>09:00</td>
                                     <td>Pedro Costa</td>
-                                    <td>22/02</td>
-                                    <td><span class="badge badge-success">OK</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- PROJETOS PAGE -->
-                <div id="projetos" class="page">
-                    <div class="section">
-                        <h2>Projetos</h2>
-                        <button class="btn btn-primary">+ Novo Projeto</button>
-                        <p style="margin-top: 15px; color: #999; font-size: 14px;">Seção de projetos em desenvolvimento...</p>
-                    </div>
-                </div>
-
-                <!-- MATERIAIS PAGE -->
+                <!-- MATERIAIS -->
                 <div id="materiais" class="page">
                     <div class="section">
                         <h2>Materiais</h2>
                         <button class="btn btn-primary">+ Novo Material</button>
-                        <p style="margin-top: 15px; color: #999; font-size: 14px;">Seção de materiais em desenvolvimento...</p>
+                        <p style="margin-top: 16px; color: #999; font-size: 14px;">Seção de materiais em desenvolvimento...</p>
                     </div>
                 </div>
 
-                <!-- FINANCEIRO PAGE -->
+                <!-- FINANCEIRO -->
                 <div id="financeiro" class="page">
                     <div class="section">
                         <h2>Financeiro</h2>
                         <button class="btn btn-primary">+ Nova Transação</button>
-                        <p style="margin-top: 15px; color: #999; font-size: 14px;">Seção financeira em desenvolvimento...</p>
-                    </div>
-                </div>
-
-                <!-- RELATÓRIOS PAGE -->
-                <div id="relatorios" class="page">
-                    <div class="section">
-                        <h2>Relatórios</h2>
-                        <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px;">
-                            <button class="btn btn-primary" style="width: 100%;">Relatório Financeiro</button>
-                            <button class="btn btn-primary" style="width: 100%;">Relatório de Projetos</button>
-                            <button class="btn btn-primary" style="width: 100%;">Relatório de Clientes</button>
-                            <button class="btn btn-primary" style="width: 100%;">Relatório de Materiais</button>
-                        </div>
+                        <p style="margin-top: 16px; color: #999; font-size: 14px;">Seção financeira em desenvolvimento...</p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- MOBILE MENU -->
+        <ul class="mobile-menu">
+            <li class="mobile-menu-items" style="list-style: none; display: flex; width: 100%; height: 100%; margin: 0; padding: 0;">
+                <a class="menu-link active" data-page="dashboard" style="flex: 1;"><span>📊</span><span>Dashboard</span></a>
+                <a class="menu-link" data-page="carros" style="flex: 1;"><span>🚗</span><span>Carros</span></a>
+                <a class="menu-link" data-page="orcamentos" style="flex: 1;"><span>💰</span><span>Orçamentos</span></a>
+                <a class="menu-link" data-page="clientes" style="flex: 1;"><span>👥</span><span>Clientes</span></a>
+                <a class="menu-link" data-page="agendamentos" style="flex: 1;"><span>📅</span><span>Agenda</span></a>
+            </li>
+        </ul>
     </div>
 
     <script>
-        // Menu toggle para mobile
-        const menuToggle = document.getElementById('menu-toggle');
-        const sidebar = document.getElementById('sidebar');
-
-        if (menuToggle) {
-            menuToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('open');
-            });
-        }
-
-        // Navegação entre páginas
+        // Navegação
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Fecha menu no mobile
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('open');
-                }
-                
-                // Remove active de todos
                 document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 
-                // Adiciona active no clicado
                 this.classList.add('active');
                 const pageId = this.getAttribute('data-page');
                 document.getElementById(pageId).classList.add('active');
                 
-                // Atualiza título
-                document.getElementById('page-title').textContent = this.textContent;
+                document.getElementById('page-title').textContent = this.textContent.trim();
             });
         });
 
-        // Mostrar/Ocultar formulários
+        // Toggle formulários
         function toggleForm(formId) {
             const form = document.getElementById(formId);
             form.style.display = form.style.display === 'none' ? 'block' : 'none';
